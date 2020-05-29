@@ -1,6 +1,13 @@
 #include "array_sorts.h"
 #include <stdio.h>
 
+void swap(int *a, int *b)
+{
+  int temp = *a;
+  *a = *b;
+  *b = temp;
+}
+
 void print_array(int_ptr array, int length)
 {
   for (size_t i = 0; i < length; i++)
@@ -21,9 +28,7 @@ int_ptr bubble_sort(int_ptr array, int length)
       if (!(array[j] < array[j + 1]))
       {
         is_sorted = False;
-        int temp = array[j];
-        array[j] = array[j + 1];
-        array[j + 1] = temp;
+        swap(&array[j], &array[j + 1]);
       }
     }
   }
@@ -42,9 +47,7 @@ int_ptr selection_sort(int_ptr array, int length)
         index_of_min = j;
       }
     }
-    int temp = array[i];
-    array[i] = array[index_of_min];
-    array[index_of_min] = temp;
+    swap(&array[i], &array[index_of_min]);
   }
   return array;
 }
@@ -63,13 +66,6 @@ int_ptr insertion_sort(int_ptr array, int length)
     array[j + 1] = current_element;
   }
   return array;
-}
-
-void swap(int *a, int *b)
-{
-  int temp = *a;
-  *a = *b;
-  *b = temp;
 }
 
 int partition(int_ptr array, int low, int high)
